@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container-login {
+            display: flex;
+            width: 100%;
+            max-width: 1920px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .image-section {
+            flex: 1;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-section img {
+            width: 100%;
+            height: auto;
+        }
+        .login {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-login {
+            width: 60%;
+        }
+        .card-login h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+        .card-login form {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-login form input {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .card-login form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card-login form button:hover {
+            background-color: #0056b3;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .container-login {
+                flex-direction: column;
+            }
+            .image-section {
+                display: none;
+            }
+            .login {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-login">
+        <div class="image-section">
+            <img src="/images/login.avif" alt="Login Image">
+        </div>
+        <div class="login">
+            <div class="card-login">
+                <h1>Sign In</h1>
+                <form id="loginForm" action="/auth/login" enctype="multipart/form-data" method="post">
+                    <input type="email" name="email" placeholder="example@gmail.com" required> 
+                    <input type="password" name="password" placeholder="Password" aria-autocomplete="none" required> 
+                    <div>
+                        <button type="submit">Sign In</button>
+                    </div>
+                </form>
+                <div id="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const form = document.getElementById('loginForm');
+            const errorMessageDiv = document.getElementById('error-message');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent the default form submission
+
+                const formData = new FormData(form);
+                const data = {
+                    email: formData.get('email'),
+                    password: formData.get('password')
+                };
+
+                try {
+                    const response = await fetch('/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.status == 200) {
+                        const result = await response.json();
+                        window.location.href = '/';
+                        console.log('Success:', result);
+                        // Handle successful login here (e.g., redirect to another page)
+                    } else {
+                        console.error('Error:', response.statusText);
+                        const errorData = await response.json();
+                        errorMessageDiv.textContent = errorData.message || 'Xatolik yuz berdi';
+                        // Handle error here (e.g., display error message)
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Handle error here (e.g., display error message)
+                }
+            });
+        });
+    </script>
+</body>
+</html>

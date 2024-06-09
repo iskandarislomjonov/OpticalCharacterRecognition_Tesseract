@@ -1,0 +1,195 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+    <style>
+        .btns {
+            display: flex;
+            gap: 10px;
+        }
+        .btn, .btn1 {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head >
+<body>
+   <!-- navbar start  -->
+    <nav>
+        <div class="container">
+            <div class="nav">
+                <!-- <img class="logo_ocr" src="images/ocr_logo.jpeg" alt="" width="350px" height="100px"> -->
+                <img src="images/ocr.png" alt=""> 
+                <p><span> Optical Character Recognition (OCR)</span></p>
+                <div class="btns">
+                    <button class="btn" onclick="location.href='http://localhost:2000/login_page'">Sign In</button>
+                    <button class="btn1" onclick="location.href='http://localhost:2000/register_page'">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- navbar end -->
+
+    <!-- Section start -->
+
+    <section>
+        <div class="container-card">
+            <div class="section">
+                <h4><p><i>Tasvirlardan matn ajratib olish uchun belgilarni optik aniqlash veb-ilovasini yaratishning asosiy maqsadi foydalanuvchilarga tasvirlardagi matnlarni oson va tezkor tarzda raqamli formatga o‘tkazish imkoniyatini berishdir. Bizning web ilovamiz orqali tasvirdan matnni ajratib olish mumkin.</i> </p></h4>
+                <div class="card">
+                    <div class="img">
+                        <img src="images/person.png" alt="" width="600px" >
+                        
+                    </div>
+                    <div class="inp">
+                        <div>
+                            <form id="uploadForm" enctype="multipart/form-data" action="/upload" method="post">
+                                <input type="file" id="fileInput" name="image" accept="image/*">
+                                <button type="submit">Rasmni yuklash</button>
+                            </form>
+                        </div >
+                        <div >
+                            <img src="images/OCR_1.jpg" alt="" width="600px" height="350px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
+
+
+    <!-- Section end -->
+
+    <!-- Instruction start -->
+        <section>
+            <div class="container">
+                <div class="instruction">
+                    <h2 style="color:rgb(15, 15, 143);">Rasmlarni qanday qilib matnga aylantirish mumkin</h2>
+                    <div class="numbers">
+                        <img src="images/upload.png" alt="">
+                        <img src="images/convert.png" alt="">
+                        <img src="images/result.png" alt="">
+                    </div>
+                    <div class="texts">
+                        <div class="text">
+                            <div>
+                                <h2>Upload Image File</h2>
+                                <h3> <p>Kompyuteringizdan kerakli rasmni tanlang yoki sudrab olib kelib yuklang</p></h3>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div>
+                                <h2>Convert to text</h2>
+                               <h3><p>Yuklangan tasvirdan matnni ajratib olish jarayonlari </p></h3>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div>
+                                <h2>Download text file</h2>
+                                <h3><p>Olingan natijani yuklab olishingiz mumkin bo'ladi</p></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Instruction end -->
+
+
+    <!-- Contact start -->
+        <section>
+            <div class="container-contact">
+                <h1><p style="color: rgb(24, 118, 24);">Bizga taklif va murojatlaringiz bo‘lsa shu yerda qoldirishingiz mumkin </p></h1>
+                <div class="contact">
+                    <img src="images/message_send.jpg" alt="">
+                    <div class="inpts">
+                        <div class="inp2">
+                            <input type="text" id="your_name" placeholder="your name" required>
+                            <input type="email" id="email" placeholder="example@mail.com" required>
+                        </div>
+                        <textarea  id="txt" cols="32" rows="12" placeholder="Your message....."  required></textarea>
+                        <div class="btn">
+                            <button onclick="sendData(event)">Send</button>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </section>
+    <!-- Contact end -->
+
+  
+
+    <script>
+      async function sendData(event) {
+            event.preventDefault(); // Formani avtomatik yuborilishini to'xtatadi.
+
+             // Ismni olish
+             // Emailni olish
+             // Xabarni olish
+
+                const message = document.getElementById('txt').value;
+                const email = document.getElementById('email').value;
+                const name = document.getElementById('your_name').value;
+
+            const data = {
+                your_name: name,
+                email: email,
+                message_list: message
+            };
+
+            // Ma'lumotlarni '/message' yo'liga POST zapros bilan yuborish
+          const res = await  fetch('/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (res.status == 200) {
+                document.getElementById('your_name').value = '';
+            document.getElementById('email').value = ''; 
+            document.getElementById('txt').value = ''; 
+            }
+            
+        }
+
+        
+//////////////////////////////////////////////////////////////////////////////////////////
+//         const form = document.getElementById('uploadForm');
+//         const resultDiv = document.getElementById('text');
+
+// form.addEventListener('submit', async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(form);
+//     try {
+//         const response = await fetch('/upload', {
+//             method: 'POST',
+//             body: formData
+//         });
+//         const text = await response.text();
+//         resultDiv.innerText = text;
+
+//     } catch (error) {
+//         console.error('Xatolik:', error);
+//     }
+// });
+
+
+
+
+        
+    </script>
+</body>
+</html>

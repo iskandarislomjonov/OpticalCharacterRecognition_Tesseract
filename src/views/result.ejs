@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Natijasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        textarea {
+            width: 80%;
+            max-width: 800px;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #fff;
+            resize: none;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .home-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid #007BFF;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #007BFF;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .home-link:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #0056b3;">Tasvirdan ajaratib olingan matn:</h1>
+        <textarea rows="20" cols="80"><%= text %></textarea>
+        <h2 style="color: rgb(198, 174, 35);">Sizga kerakli fayllarni yuklab olishingiz mumkin.</h2>
+<hr>        
+        <ul>
+            <li><a href="<%= txtFilePath %>" download>TXT faylini Yuklab olish</a></li>
+            <br>
+            <li><a href="<%= docFilePath %>" download>DOC faylini Yuklab olish</a></li>
+            <br>
+            <li><a href="<%= pdfFilePath %>" download>PDF faylini Yuklab olish</a></li>
+        </ul>
+        <a class="home-link" href="/">Bosh sahifa</a>
+    </div>
+</body>
+</html>

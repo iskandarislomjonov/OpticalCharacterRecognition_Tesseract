@@ -1,0 +1,7 @@
+Ushbu bitiruv malakaviy ishida tasvirlardan matnni ajratib olish uchun
+belgilarni optik aniqlash veb-ilovasi yaratishdan iborat hisoblanadi. Bunda real
+vaqtda ishlovchi Node.js dasturiy muhitidan foydalandim. Ishning asosiy maqsadi
+shundan iboratki unda asosan bizga berilgan tasvirlardan matnni ajratib oluvchi
+veb-ilova yaratish hisoblanadi. Bu ilova orqali ishning samaradorligini oshirish,
+vaqtdan samarali foydalanish va inson omilini kamaytirishdan iborat. Bundan
+tashqari hayot faoliyati xavfsizligi va ekologiya muamolari ko`rib chiqilgan.
